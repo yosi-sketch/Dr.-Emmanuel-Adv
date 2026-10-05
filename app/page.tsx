@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { office } from "./site-data";
-import logo from "../public/cunha-lobo-logo.png";
+import logo from "../public/emmanuel-logo.png";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
   AnimatePresence,
@@ -13,7 +13,8 @@ import {
 import {
   ArrowRight,
   ArrowUpRight,
-  CarFront,
+  Gavel,
+  HeartHandshake,
   FileText,
   ShieldCheck,
   MessageCircle,
@@ -26,11 +27,9 @@ import {
 } from "lucide-react";
 
 const officeName = office.name;
-const instagramUrl = office.instagram;
 const whatsappUrl = office.whatsapp;
 const mapsUrl = office.maps;
-const portrait = "/cunha-lobo-equipe.webp";
-const officePhoto = "/cunha-lobo-equipe.webp";
+const portrait = "/emmanuel-hero.webp";
 
 const reveal: Variants = {
   hidden: { opacity: 0, y: 22 },
@@ -47,70 +46,50 @@ const stagger: Variants = {
 };
 
 const practiceAreas = [
-  { number: "01", title: "Suspensão da CNH", icon: CarFront, lead: "Sua mobilidade merece atenção",
-    areas: ["Análise da notificação e do processo", "Orientação sobre documentos e etapas", "Acompanhamento da defesa conforme o caso"],
-    summary: "Recebeu uma notificação de suspensão? Entenda sua situação e os caminhos de defesa a partir de uma análise individual.",
-    details: "A CNH faz parte da rotina e, muitas vezes, do trabalho. Nossa equipe examina a notificação, o histórico e os documentos do processo para explicar as possibilidades de atuação e as próximas etapas. Cada caso recebe uma avaliação própria, com transparência sobre os limites e as alternativas disponíveis." },
-  { number: "02", title: "Multas e infrações", icon: FileText, lead: "Clareza antes de cada decisão",
-    areas: ["Análise de autos de infração", "Avaliação das possibilidades de defesa e recurso", "Orientação e acompanhamento do procedimento"],
-    summary: "Um olhar cuidadoso sobre autos de infração e notificações, para que você compreenda as possibilidades do seu caso.",
-    details: "Uma notificação pode gerar dúvidas sobre o que aconteceu e como proceder. Na Cunha & Lobo, analisamos os documentos apresentados e o contexto da infração. Explicamos de forma acessível se há caminhos de defesa ou recurso e como o atendimento pode ser conduzido, sem promessas de resultado." },
-  { number: "03", title: "Cassação e regularização", icon: ShieldCheck, lead: "Cuidado com a sua habilitação",
-    areas: ["Análise de processos de cassação", "Orientação sobre restrições na habilitação", "Avaliação de questões junto aos órgãos de trânsito"],
-    summary: "Orientação para compreender restrições e processos relacionados à habilitação, com atenção aos documentos e à sua realidade.",
-    details: "Questões relacionadas à cassação ou a restrições na habilitação exigem uma análise cuidadosa. A equipe avalia a situação informada e os documentos disponíveis para esclarecer o cenário, identificar os encaminhamentos pertinentes e orientar você sobre cada etapa do atendimento." },
-  { number: "04", title: "Assessoria em trânsito", icon: Scale, lead: "Orientação para seguir com segurança",
-    areas: ["Esclarecimento de dúvidas sobre CNH e trânsito", "Análise de documentos e notificações", "Atendimento digital em todo o Brasil"],
-    summary: "Converse com a equipe sobre dúvidas envolvendo CNH, notificações e demandas de trânsito, de onde você estiver.",
-    details: "Nem toda dúvida começa com um processo. O atendimento também pode ajudar a compreender documentos e situações ligadas ao trânsito. Você apresenta sua demanda, nossa equipe avalia o contexto e explica as possibilidades de orientação e acompanhamento, com atendimento digital em todo o território nacional." },
+  { number: "01", title: "Direito Criminal", icon: ShieldCheck, lead: "Defesa com atenção e responsabilidade",
+    areas: ["Análise individual da situação apresentada", "Orientação sobre documentos e procedimentos", "Acompanhamento das etapas da defesa"],
+    summary: "Uma defesa começa pela escuta. Atenção aos fatos, análise cuidadosa e clareza sobre os próximos passos.",
+    details: "Uma situação criminal pede atenção, discrição e uma análise criteriosa. O atendimento começa pela compreensão dos fatos e dos documentos disponíveis. A partir dessa conversa, o Dr. Emmanuel explica as possibilidades de atuação e o acompanhamento necessário, com respeito à sua história e às particularidades do caso." },
+  { number: "02", title: "Tribunal do Júri", icon: Gavel, lead: "Preparo para os momentos decisivos",
+    areas: ["Estudo dos fatos e dos elementos do processo", "Preparação e organização da defesa", "Orientação e acompanhamento do caso"],
+    summary: "Dedicação ao estudo do processo e à construção da defesa, com comunicação próxima em cada etapa.",
+    details: "A atuação no Tribunal do Júri envolve estudo, preparo e responsabilidade. Cada processo precisa ser compreendido em seus detalhes. O Dr. Emmanuel dedica atenção aos elementos apresentados e à preparação da defesa, mantendo uma comunicação clara sobre o andamento e as etapas do caso." },
+  { number: "03", title: "Direito de Família", icon: HeartHandshake, lead: "Sensibilidade para acolher sua história",
+    areas: ["Orientação em situações de divórcio", "Análise dos documentos e do contexto familiar", "Acompanhamento dos encaminhamentos definidos"],
+    summary: "Questões familiares merecem uma conversa cuidadosa. Orientação para atravessar mudanças com mais clareza.",
+    details: "Mudanças na vida familiar trazem dúvidas e decisões importantes. O atendimento oferece espaço para compreender sua realidade, organizar os documentos e conversar sobre os possíveis encaminhamentos. A orientação em situações de divórcio considera o contexto de cada pessoa, com discrição, atenção e respeito." },
+  { number: "04", title: "Consultoria Jurídica", icon: FileText, lead: "Clareza antes de tomar uma decisão",
+    areas: ["Escuta e compreensão da sua demanda", "Análise inicial de documentos", "Orientação sobre possibilidades e próximos passos"],
+    summary: "Apresente sua dúvida e compreenda os caminhos possíveis com uma orientação acessível e individualizada.",
+    details: "Nem toda demanda começa com um processo. A consulta permite apresentar suas dúvidas, compreender documentos e avaliar as possibilidades de acompanhamento. O Dr. Emmanuel esclarece as condições do atendimento e os próximos passos de forma direta, para que você possa tomar decisões com mais informação." },
 ];
 
 const reviews = [
-  { author: "Magno Augusto de Aquino", quote: "Excelente e recomendo. São muito atenciosos, transparentes, muito inteligentes e ágeis, enfim nota 10 para todo o processo, desde o primeiro contato." },
-  { author: "José Pedro de Alcantara Neto", quote: "Excelentes profissionais, atenção e clareza desde o primeiro contato. Demonstraram uma experiencia impressionante no trato de processo de suspensão de CNH. Agilidade, transparência e respeito." },
-  { author: "Nara Rubia", quote: "Profissionais incríveis, de uma educação e profissionalismo impar. Com toda certeza indicaria e voltaria a contratar os serviços de um escritório tão sério e competente." },
-  { author: "Ludmila", quote: "Solicitei atendimento para tirar dúvidas quanto a suspensão de CNH, me atenderam muito rápido, tiraram todas as dúvidas e ainda nos orientaram." },
-  { author: "Ezequiel Venâncio", quote: "Atendimento excelente...super recomendo..." },
-  { author: "Juliano Frederico", quote: "Muito satisfatório, receber suas orientações super indico e que Deus abençoe sempre vc ou vcs" },
+  { author: "Nagila", quote: "Excelente atendimento. Profissional muito atencioso, explicou tudo com clareza e me deixou segura sobre o caso. Muito obrigada pelo suporte." },
+  { author: "Rafael Camargos", quote: "Sempre demonstrou atenção, clareza nas explicações e verdadeiro compromisso em ajudar. Recomendo sem hesitar." },
+  { author: "jane gomes", quote: "Advogado super atencioso, responde a todas as dúvidas, superou minhas expectativas. Super recomendo." },
+  { author: "Denize Oliveira", quote: "Profissional prestativo e expressa com muita clareza. Parabéns!!" },
+  { author: "Luara Lage", quote: "Sua clareza nas explicações e comprometimento fazem toda a diferença. Excelente advogado!" },
+  { author: "Julio Oliveira", quote: "Muito atencioso, ótimo profissional, sempre muito solicito. Pode confiar que é uma pessoa de boa índole e exemplar." },
 ];
 
 const questions = [
-  { title: "Posso ser atendido de outro estado?", answer: "Sim. O escritório atende de forma digital em todo o território nacional. A conversa inicial e o compartilhamento dos documentos podem ser feitos a distância, com orientação da equipe." },
-  { title: "Como começo o atendimento?", answer: "Entre em contato pelo WhatsApp e conte brevemente sua situação. Se houver uma notificação ou documento relacionado ao caso, informe à equipe para receber orientação sobre o que encaminhar." },
-  { title: "Meu caso pode ser resolvido?", answer: "As possibilidades dependem da análise dos documentos e das circunstâncias de cada situação. A equipe explica os caminhos disponíveis e os limites da atuação. Não há garantia de resultado." },
-  { title: "Onde fica o escritório?", answer: "Na Rua Tavares de Melo, 139, sala 04, Centro, Conselheiro Lafaiete, Minas Gerais. Para atendimento presencial, entre em contato e agende sua visita." },
+  { title: "Como agendo um atendimento?", answer: "Entre em contato pelo WhatsApp (31) 99798-9797 e conte brevemente sua situação. Você receberá orientação sobre o agendamento, os documentos necessários e as condições do atendimento." },
+  { title: "O que devo levar à primeira conversa?", answer: "Se houver documentos, notificações ou informações sobre um processo, mencione-os ao agendar. O escritório orientará quais materiais são necessários para compreender sua demanda." },
+  { title: "Posso apresentar minha dúvida pelo WhatsApp?", answer: "Sim. O WhatsApp é o canal para o primeiro contato com o escritório. Apresente sua dúvida e consulte a disponibilidade e o formato de atendimento adequado ao seu caso." },
+  { title: "Onde fica o escritório?", answer: "Na Av. Duque de Caxias, 1.389, 2º andar, bairro Quatorze de Fevereiro, em Itabira, Minas Gerais. CEP 35900-236. Entre em contato para agendar o atendimento presencial." },
 ];
 
 const navigation = [
   ["Início", "#inicio"],
   ["Atuação", "#atuacao"],
-  ["Equipe", "#equipe"],
+  ["O advogado", "#advogado"],
   ["Escritório", "#escritorio"],
   ["Contato", "#contato"],
 ];
 
 function BrandMark({ compact = false }: { compact?: boolean }) {
-  return <Image src={logo} alt="Cunha & Lobo Advocacia e Assessoria Jurídica" sizes={compact ? "(max-width: 640px) 180px, 210px" : "(max-width: 640px) 200px, 240px"} className={compact ? "h-auto w-[180px] sm:w-[210px]" : "h-auto w-[200px] sm:w-[240px]"} />;
-}
-
-function InstagramMark({ size = 16 }: { size?: number }) {
-  return (
-    <svg
-      aria-hidden="true"
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.7"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <rect x="3" y="3" width="18" height="18" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.5" cy="6.7" r="0.7" fill="currentColor" stroke="none" />
-    </svg>
-  );
+  return <Image src={logo} alt="Emmanuel Souza — Advogado — OAB/MG 232.059" sizes={compact ? "(max-width: 640px) 190px, 260px" : "(max-width: 640px) 240px, 300px"} className={compact ? "h-auto w-[190px] sm:w-[260px]" : "h-auto w-[240px] sm:w-[300px]"} />;
 }
 
 function Heading({
@@ -292,22 +271,22 @@ export default function Home() {
                 className="relative z-10 max-w-2xl lg:py-6"
               >
                 <motion.p variants={reveal} className="eyebrow-light mb-7">
-                  CUNHA & LOBO · ADVOCACIA
+                  ADVOCACIA EM ITABIRA · MINAS GERAIS
                 </motion.p>
                 <motion.h1
                   variants={reveal}
                   className="max-w-[730px] font-serif text-[2.85rem] leading-[1.02] tracking-[-0.045em] text-white sm:text-6xl lg:text-[4.6rem]"
                 >
-                  Seu direito de ir além.<br />Nossa dedicação em{" "}
-                  <em className="font-normal text-brand-300">defender.</em>
+                  Defesa firme.<br />Orientação clara.<br />
+                  <em className="font-normal text-brand-300">Cuidado com você.</em>
                 </motion.h1>
                 <motion.p
                   variants={reveal}
                   className="mt-7 max-w-xl text-[15px] leading-7 text-white/70 sm:text-base sm:leading-8"
                 >
-                  Direito de Trânsito com atenção à sua história.
-                  Orientação clara e acompanhamento próximo para cuidar
-                  da sua habilitação, com atendimento digital em todo o Brasil.
+                  Dr. Emmanuel Carlos de Souza. Advocacia criminal e de família
+                  com escuta atenta, análise criteriosa e compromisso
+                  com cada etapa da sua história.
                 </motion.p>
                 <motion.div
                   variants={reveal}
@@ -339,11 +318,11 @@ export default function Home() {
                 >
                   <span className="inline-flex items-center gap-2">
                     <MapPin size={15} className="text-brand-300" />
-                    Conselheiro Lafaiete · MG
+                    Itabira · MG
                   </span>
                   <span className="inline-flex items-center gap-2">
                     <Scale size={15} className="text-brand-300" />
-                    Atendimento em todo o Brasil
+                    {office.registration}
                   </span>
                 </motion.div>
               </motion.div>
@@ -358,11 +337,11 @@ export default function Home() {
                 }}
                 className="relative mx-auto w-full max-w-[490px] lg:ml-auto lg:mr-2"
               >
-                <div className="absolute -inset-3 -rotate-2 border border-brand-300/35 sm:-inset-4" />
+                <div className="absolute -inset-3 border border-brand-300/35 sm:-inset-4" />
                 <div className="relative aspect-[4/5] overflow-hidden bg-night">
                   <Image
                     src={portrait}
-                    alt="Victor Lobo e Eduarda Cunha, sócios da Cunha & Lobo Advocacia"
+                    alt="Dr. Emmanuel Carlos de Souza, advogado em Itabira"
                     fill
                     sizes="(max-width: 640px) 90vw, (max-width: 1024px) 70vw, 42vw"
                     className="object-cover object-top"
@@ -371,9 +350,9 @@ export default function Home() {
                   <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-night/90 to-transparent" />
                   <figcaption className="absolute bottom-6 left-6 right-6 flex items-end justify-between gap-3 text-white sm:bottom-8 sm:left-8 sm:right-8">
                     <div>
-                      <p className="font-serif text-2xl">Cunha & Lobo</p>
+                      <p className="font-serif text-2xl">Emmanuel Souza</p>
                       <p className="mt-1 text-[10px] uppercase tracking-[0.17em] text-white/70">
-                        Atuação em todo o Brasil
+                        Advogado · OAB/MG 232.059
                       </p>
                     </div>
                     <span className="grid size-11 shrink-0 place-items-center rounded-full border border-brand-200/70 text-brand-200">
@@ -394,8 +373,8 @@ export default function Home() {
           >
             <div className="mx-auto grid max-w-7xl gap-6 px-5 py-7 sm:grid-cols-3 sm:gap-4 sm:px-8 lg:px-12">
               {[
-                [office.clients, "clientes em todo o Brasil"],
-                ["Todo o Brasil", "atendimento digital"],
+                ["232.059", "inscrição na OAB/MG"],
+                ["Itabira · MG", "sede do escritório"],
                 [`${office.rating} / 5`, "avaliação no Google"],
               ].map(([value, label], index) => (
                 <div
@@ -431,9 +410,9 @@ export default function Home() {
               >
                 <Heading
                   eyebrow="ÁREAS DE ATUAÇÃO"
-                  description="Da primeira notificação às próximas etapas, orientação para compreender sua situação e as possibilidades de atuação."
+                  description="Defesa, orientação e acompanhamento com atenção às particularidades de cada caso."
                 >
-                  Direito de Trânsito.<br /><em className="font-normal text-brand-700">Atenção a cada caminho.</em>
+                  Quando o direito encontra<br /><em className="font-normal text-brand-700">a sua história.</em>
                 </Heading>
                 <span className="hidden h-px w-28 bg-brand-500/60 md:mb-3 md:block" />
               </motion.div>
@@ -487,31 +466,26 @@ export default function Home() {
             </div>
           </section>
 
-          <section id="equipe" className="scroll-mt-24 bg-white py-20 sm:py-28 lg:py-32">
+          <section id="advogado" className="scroll-mt-24 bg-white py-20 sm:py-28 lg:py-32">
             <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:gap-20 lg:px-12">
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }} variants={stagger} className="grid grid-cols-2 gap-4 sm:gap-5">
-                {[
-                  { name: "Eduarda Cunha", role: "Sócia · Advogada", photo: "/eduarda-retrato.webp" },
-                  { name: "Victor Lobo", role: "Sócio · Advogado", photo: "/vitor-retrato.webp" },
-                ].map((person, index) => (
-                  <motion.figure key={person.name} variants={reveal} className={index === 1 ? "mt-12" : ""}>
-                    <div className="relative aspect-[3/4] overflow-hidden bg-night">
-                      <Image src={person.photo} alt={`${person.name}, ${person.role.toLowerCase()} da Cunha & Lobo Advocacia`} fill sizes="(max-width: 640px) 43vw, (max-width: 1024px) 40vw, 22vw" className="object-cover object-top" />
-                    </div>
-                    <figcaption className="border-b border-brand-300 py-4">
-                      <p className="font-serif text-xl sm:text-2xl">{person.name}</p>
-                      <p className="mt-1 text-[9px] uppercase tracking-[0.12em] text-brand-700 sm:text-[10px]">{person.role}</p>
-                    </figcaption>
-                  </motion.figure>
-                ))}
-              </motion.div>
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={reveal}>
-                <Heading eyebrow="QUEM ESTÁ AO SEU LADO" description="Uma orientação jurídica começa por entender quem está do outro lado da conversa.">Proximidade para ouvir.<br /><em className="font-normal text-brand-700">Clareza para orientar.</em></Heading>
-                <p className="mt-6 text-[15px] leading-8 text-ink-soft">Eduarda Cunha e Victor Lobo estão à frente de uma advocacia que valoriza a escuta, a análise cuidadosa e a comunicação direta. Na Cunha & Lobo, você encontra orientação para compreender sua situação e participar das decisões sobre o seu caso, mesmo a distância.</p>
-                <div className="mt-9 space-y-5 border-t border-ink/10 pt-7">
-                  {["Atenção à sua história e às suas necessidades", "Orientação em uma linguagem que você entende", "Presença e cuidado ao longo do atendimento"].map((item) => <p key={item} className="flex items-start gap-3 text-sm leading-6"><span className="mt-2 size-1.5 shrink-0 rounded-full bg-brand-500" />{item}</p>)}
+              <motion.figure initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }} variants={reveal} className="relative mx-auto w-full max-w-[480px]">
+                <div className="relative aspect-[3/4] overflow-hidden bg-night">
+                  <Image src="/emmanuel-retrato.webp" alt="Dr. Emmanuel Carlos de Souza em retrato profissional" fill sizes="(max-width: 640px) 90vw, (max-width: 1024px) 65vw, 40vw" className="object-cover object-top" />
                 </div>
-                <a href={whatsappUrl} target="_blank" rel="noreferrer" className="mt-9 inline-flex items-center gap-3 border-b border-brand-600 pb-2 text-xs font-semibold uppercase tracking-widest text-brand-800">Converse com a equipe <ArrowUpRight size={16} /></a>
+                <figcaption className="border-b border-brand-300 py-5">
+                  <p className="font-serif text-2xl sm:text-3xl">Dr. Emmanuel Carlos de Souza</p>
+                  <p className="mt-2 text-[10px] uppercase tracking-[0.15em] text-brand-700">Advogado · {office.registration}</p>
+                </figcaption>
+                <span aria-hidden="true" className="absolute -left-3 -top-3 size-20 border-l border-t border-brand-300 sm:-left-5 sm:-top-5" />
+              </motion.figure>
+              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={reveal}>
+                <Heading eyebrow="O ADVOGADO" description="Por trás de cada caso, existe uma pessoa que precisa ser ouvida.">Firmeza na atuação.<br /><em className="font-normal text-brand-700">Humanidade no atendimento.</em></Heading>
+                <p className="mt-6 text-[15px] leading-8 text-ink-soft">Em Itabira, o Dr. Emmanuel Carlos de Souza conduz uma advocacia que valoriza a atenção aos detalhes, o estudo de cada demanda e o diálogo com quem busca orientação.</p>
+                <p className="mt-4 text-[15px] leading-8 text-ink-soft">A proposta é simples: ouvir com cuidado, explicar com clareza e acompanhar com responsabilidade. Da primeira conversa às próximas etapas, sua história recebe um olhar individual.</p>
+                <div className="mt-9 space-y-5 border-t border-ink/10 pt-7">
+                  {["Escuta atenta e respeito à sua realidade", "Explicações claras para decisões conscientes", "Dedicação e discrição em cada etapa"].map((item) => <p key={item} className="flex items-start gap-3 text-sm leading-6"><span className="mt-2 size-1.5 shrink-0 rounded-full bg-brand-500" />{item}</p>)}
+                </div>
+                <a href={whatsappUrl} target="_blank" rel="noreferrer" className="mt-9 inline-flex items-center gap-3 border-b border-brand-600 pb-2 text-xs font-semibold uppercase tracking-widest text-brand-800">Converse com o escritório <ArrowUpRight size={16} /></a>
               </motion.div>
             </div>
           </section>
@@ -521,33 +495,16 @@ export default function Home() {
             className="scroll-mt-24 bg-brand-100/40 py-20 sm:py-28 lg:py-32"
           >
             <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 sm:px-8 lg:grid-cols-[1fr_1fr] lg:gap-20 lg:px-12">
-              <motion.figure
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
-                variants={reveal}
-                className="relative mx-auto w-full max-w-[570px]"
-              >
-                <div className="relative aspect-[0.95] overflow-hidden bg-night">
-                  <Image
-                    src={officePhoto}
-                    alt="Victor Lobo e Eduarda Cunha em retrato no escritório"
-                    fill
-                    sizes="(max-width: 1024px) 90vw, 46vw"
-                    className="object-cover object-[50%_48%]"
-                    loading="lazy"
-                  />
+              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={reveal} className="relative border border-brand-300/30 bg-night px-7 py-10 text-white sm:p-12">
+                <p className="eyebrow-light">NOSSA SEDE</p>
+                <div className="my-10 flex items-center justify-between border-y border-white/15 py-8">
+                  <div><p className="font-serif text-5xl text-brand-200">Itabira.</p><p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-white/60">Minas Gerais</p></div>
+                  <Scale size={62} strokeWidth={0.8} className="text-brand-300" aria-hidden="true" />
                 </div>
-                <figcaption className="absolute -bottom-5 left-5 border-l-2 border-brand-600 bg-white px-5 py-4 shadow-card sm:-left-6 sm:px-7">
-                  <p className="font-serif text-xl text-ink">
-                    Conselheiro Lafaiete, MG
-                  </p>
-                  <p className="mt-1 text-[11px] leading-5 text-ink-soft">
-                    Cunha & Lobo Advocacia
-                  </p>
-                </figcaption>
-                <span className="absolute -right-3 -top-3 -z-10 size-20 border-r border-t border-brand-600/45 sm:-right-6 sm:-top-6 sm:size-28" />
-              </motion.figure>
+                <address className="not-italic text-sm leading-8 text-white/75">Av. Duque de Caxias, 1.389<br />2º andar · Quatorze de Fevereiro<br />Itabira · MG · CEP 35900-236</address>
+                <a href={mapsUrl} target="_blank" rel="noreferrer" className="mt-8 inline-flex items-center gap-3 border-b border-brand-300/60 pb-2 text-xs text-brand-200">Como chegar <ArrowUpRight size={15} /></a>
+                <span aria-hidden="true" className="absolute right-0 top-0 h-px w-28 bg-brand-300" />
+              </motion.div>
 
               <motion.div
                 initial="hidden"
@@ -562,23 +519,23 @@ export default function Home() {
                   variants={reveal}
                   className="mt-4 max-w-2xl font-serif text-4xl leading-[1.07] tracking-[-0.035em] text-ink sm:text-5xl lg:text-[3.55rem]"
                 >
-                  De Minas Gerais,<br />para todo o Brasil.
+                  Um ponto de apoio.<br /><em className="font-normal text-brand-700">Perto de você.</em>
                 </motion.h2>
                 <motion.p
                   variants={reveal}
                   className="mt-6 max-w-xl text-[15px] leading-7 text-ink-soft"
                 >
-                  Nossa sede está em Conselheiro Lafaiete, mas a proximidade
-                  vai além de um endereço. Pelo atendimento digital,
-                  acolhemos demandas de clientes de todo o Brasil.
+                  Localizado na Avenida Duque de Caxias, em Itabira,
+                  o escritório é um ponto de encontro para conversar
+                  sobre suas dúvidas e compreender sua situação com tranquilidade.
                 </motion.p>
                 <motion.p
                   variants={reveal}
                   className="mt-4 max-w-xl text-[15px] leading-7 text-ink-soft"
                 >
-                  Documentos, dúvidas e orientações podem ser compartilhados
-                  de forma digital, com cuidado e comunicação direta.
-                  Para atendimento na sede, converse com nossa equipe e agende sua visita.
+                  O primeiro contato pode ser feito pelo WhatsApp.
+                  Consulte a disponibilidade, as condições do atendimento
+                  e os documentos necessários antes de agendar sua visita.
                 </motion.p>
                 <motion.a
                   variants={reveal}
@@ -605,7 +562,7 @@ export default function Home() {
               <div className="flex flex-col gap-7 border-b border-ink/10 pb-8 sm:flex-row sm:items-end sm:justify-between">
                 <Heading
                   eyebrow="AVALIAÇÕES PÚBLICAS"
-                  description="Escuta, clareza e atenção nas palavras de quem conhece nosso atendimento. Uma seleção de relatos públicos no Google."
+                  description="Atenção e clareza nas palavras de quem compartilhou sua experiência com o Dr. Emmanuel no Google."
                 >
                   A experiência no atendimento.
                 </Heading>
@@ -623,7 +580,7 @@ export default function Home() {
                 </a>
               </div>
 
-              <div className="mt-8 flex flex-wrap items-center gap-4"><span className="font-serif text-4xl text-ink">{office.rating}</span><span className="flex gap-1 text-brand-700" aria-label="Nota 4,9 de 5">{[1,2,3,4,5].map((star) => <Star key={star} size={16} fill="currentColor" />)}</span><p className="text-xs text-ink-soft">{office.reviewCount} avaliações no Google</p></div>
+              <div className="mt-8 flex flex-wrap items-center gap-4"><span className="font-serif text-4xl text-ink">{office.rating}</span><span className="flex gap-1 text-brand-700" aria-label={`Nota ${office.rating} de 5`}>{[1,2,3,4,5].map((star) => <Star key={star} size={16} fill="currentColor" />)}</span><p className="text-xs text-ink-soft">{office.reviewCount} avaliações no Google</p></div>
               <p className="mt-3 text-[11px] leading-5 text-ink-soft">Nota e quantidade de avaliações do perfil compartilhado pelo escritório. Consulte o Google para os dados atuais.</p>
               <motion.div
                 initial="hidden"
@@ -665,12 +622,12 @@ export default function Home() {
           <section id="atendimento" className="scroll-mt-24 border-t border-ink/10 bg-ivory py-20 sm:py-24">
             <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }} variants={reveal}>
-                <Heading eyebrow="COMO FUNCIONA" description="Um atendimento pensado para tornar cada etapa mais clara, de onde você estiver.">Uma conversa.<br /><em className="font-normal text-brand-700">Um caminho bem orientado.</em></Heading>
+                <Heading eyebrow="COMO FUNCIONA" description="Da primeira mensagem ao acompanhamento, uma conversa clara sobre cada etapa.">Uma conversa.<br /><em className="font-normal text-brand-700">Um caminho bem orientado.</em></Heading>
               </motion.div>
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }} variants={stagger} className="mt-12 grid gap-8 sm:grid-cols-3">
                 {[
                   ["01", "Conte sua história", "Entre em contato pelo WhatsApp e apresente sua dúvida ou a situação que precisa de atenção."],
-                  ["02", "Entenda as possibilidades", "A equipe avalia os documentos e explica os caminhos e as condições do atendimento."],
+                  ["02", "Entenda as possibilidades", "O escritório analisa sua demanda e explica as possibilidades e as condições do atendimento."],
                   ["03", "Acompanhe cada etapa", "Com a atuação definida, você recebe orientação sobre os próximos passos do seu caso."],
                 ].map(([number, title, description]) => (
                   <motion.div key={number} variants={reveal} className="border-t border-brand-300 pt-6">
@@ -705,7 +662,7 @@ export default function Home() {
                 <Heading
                   eyebrow="CONTATO E LOCALIZAÇÃO"
                   light
-                  description="Conte sua situação à nossa equipe e saiba como podemos orientar você. Atendimento digital em todo o Brasil e presencial mediante agendamento."
+                  description="Apresente sua dúvida ao escritório e consulte as condições para uma orientação individual. Atendimento presencial em Itabira mediante agendamento."
                 >
                   Seu próximo passo começa com uma conversa.
                 </Heading>
@@ -720,7 +677,6 @@ export default function Home() {
                     <ArrowUpRight size={14} />
                   </a>
                   <a href={office.telephone} className="inline-flex items-center gap-3 py-2 text-sm text-white/80 hover:text-brand-200"><Phone size={17} /> {office.phoneDisplay}</a>
-                  <a href={instagramUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 py-2 text-sm text-white/80 hover:text-brand-200"><InstagramMark size={17} /> {office.instagramHandle} <ArrowUpRight size={14} /></a>
                 </div>
               </div>
 
@@ -735,21 +691,21 @@ export default function Home() {
                       Endereço
                     </p>
                     <p className="mt-1 font-serif text-2xl text-white">
-                      Conselheiro Lafaiete · MG
+                      Itabira · MG
                     </p>
                   </div>
                 </div>
                 <address className="mt-7 max-w-md not-italic text-[14px] leading-7 text-white/70">
-                  Rua Tavares de Melo, 139, sala 04
+                  Av. Duque de Caxias, 1.389 · 2º andar
                   <br />
-                  Centro
+                  Quatorze de Fevereiro
                   <br />
-                  Conselheiro Lafaiete · MG · CEP 36400-059
+                  Itabira · MG · CEP 35900-236
                 </address>
                 <div className="my-7 h-px bg-white/15" />
                 <div className="flex flex-wrap items-center justify-between gap-4">
                   <p className="text-xs text-white/60">
-                    Cunha & Lobo Advocacia
+                    Dr. Emmanuel Carlos de Souza
                   </p>
                   <a
                     href={mapsUrl}
@@ -775,9 +731,10 @@ export default function Home() {
               >
                 <BrandMark />
               </a>
+              <p className="mt-5 text-[10px] uppercase tracking-[0.15em] text-brand-200">{office.registration}</p>
               <p className="mt-4 max-w-xs text-xs leading-6 text-white/55">
-                Advocacia e assessoria jurídica em Direito de Trânsito.
-                De Conselheiro Lafaiete para todo o Brasil.
+                Advocacia com clareza, responsabilidade e atenção à sua história.
+                Itabira, Minas Gerais.
               </p>
             </div>
             <div>
@@ -788,8 +745,8 @@ export default function Home() {
                 <a className="footer-link" href="#atuacao">
                   Áreas de atuação
                 </a>
-                <a className="footer-link" href="#equipe">
-                  Equipe
+                <a className="footer-link" href="#advogado">
+                  O advogado
                 </a>
                 <a className="footer-link" href="#escritorio">
                   O escritório
@@ -815,7 +772,6 @@ export default function Home() {
                 >
                   <MessageCircle size={14} /> WhatsApp
                 </a>
-                <a href={instagramUrl} target="_blank" rel="noreferrer" className="footer-link inline-flex items-center gap-2"><InstagramMark size={14} /> {office.instagramHandle}</a>
                 <a href={office.telephone} className="footer-link inline-flex items-center gap-2"><Phone size={14} /> {office.phoneDisplay}</a>
                 <a
                   href={mapsUrl}
@@ -823,7 +779,7 @@ export default function Home() {
                   rel="noreferrer"
                   className="footer-link inline-flex items-start gap-2"
                 >
-                  <MapPin size={14} className="mt-0.5 shrink-0" /> Conselheiro Lafaiete · MG
+                  <MapPin size={14} className="mt-0.5 shrink-0" /> Itabira · MG
                 </a>
               </div>
             </div>

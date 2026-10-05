@@ -13,7 +13,7 @@ export default function AppleIcon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#1c1917",
+          background: "#17191c",
         }}
       >
         <div
@@ -23,9 +23,9 @@ export default function AppleIcon() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            border: "2px solid #c5a16b",
+            border: "2px solid #c79559",
             borderRadius: "22px",
-            color: "#f0d0a0",
+            color: "#ffe2a6",
             fontFamily: "Georgia, serif",
             fontSize: "70px",
             fontWeight: 700,
@@ -33,7 +33,7 @@ export default function AppleIcon() {
             paddingRight: "10px",
           }}
         >
-          CL
+          ES
         </div>
       </div>
     ),

@@ -16,15 +16,15 @@ const bodyFont = Plus_Jakarta_Sans({
   display: "swap",
 });
 
-const title = "Cunha & Lobo Advocacia | Conselheiro Lafaiete, MG";
-const description = "Cunha & Lobo Advocacia. Orientação em Direito de Trânsito, suspensão de CNH, multas e infrações. Atendimento digital em todo o Brasil e sede em Conselheiro Lafaiete, MG.";
+const title = "Dr. Emmanuel Carlos de Souza | Itabira, MG";
+const description = "Dr. Emmanuel Carlos de Souza, OAB/MG 232.059. Advocacia criminal e de família em Itabira, MG. Orientação clara, escuta atenta e acompanhamento individual. Agende um atendimento.";
 
 export const metadata: Metadata = {
-  applicationName: "Cunha & Lobo Advocacia",
+  applicationName: "Dr. Emmanuel Carlos de Souza",
   title, description,
-  keywords: ["Cunha & Lobo Advocacia", "advocacia em Conselheiro Lafaiete", "Direito de Trânsito", "suspensão de CNH", "recursos de multas", "advocacia digital", "advogado em Conselheiro Lafaiete"],
+  keywords: ["Dr. Emmanuel Carlos de Souza", "Emmanuel Souza advogado", "advogado em Itabira", "advocacia criminal", "Tribunal do Júri", "Direito de Família", "consultoria jurídica", "OAB/MG 232.059"],
   robots: { index: true, follow: true },
-  openGraph: { type: "website", locale: "pt_BR", title, description, siteName: "Cunha & Lobo Advocacia" },
+  openGraph: { type: "website", locale: "pt_BR", title, description, siteName: "Dr. Emmanuel Carlos de Souza" },
   twitter: { card: "summary", title, description },
 };
 
